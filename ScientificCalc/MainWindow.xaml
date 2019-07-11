@@ -1,0 +1,299 @@
+﻿<Window
+    x:Class="ScientificCalc.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ScientificCalc"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="8*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Row 0  -->
+            <Button
+                x:Name="MC"
+                Grid.Row="0"
+                Grid.Column="0"
+                Click="MC_Click">
+                <Image Source="images/buttons/mem_MC.png" />
+            </Button>
+            <Button
+                x:Name="MR"
+                Grid.Row="0"
+                Grid.Column="1">
+                <Image Cursor="Arrow" Source="images/buttons/mem_MR.png" />
+            </Button>
+            <Button
+                x:Name="MPlus"
+                Grid.Row="0"
+                Grid.Column="2">
+                <Image Source="images/buttons/mem_add.png" />
+            </Button>
+            <Button
+                x:Name="MMinus"
+                Grid.Row="0"
+                Grid.Column="3">
+                <Image Source="images/buttons/mem_remove.png" />
+            </Button>
+            <Button
+                x:Name="MS"
+                Grid.Row="0"
+                Grid.Column="4">
+                <Image Source="images/buttons/mem_MS.png" />
+            </Button>
+
+            <!--  Row 1  -->
+            <Button
+                x:Name="squared"
+                Grid.Row="1"
+                Grid.Column="0"
+                Click="Squared_Click">
+                <Image Source="images/buttons/op_squared.png" />
+            </Button>
+            <Button
+                x:Name="xToTheY"
+                Grid.Row="1"
+                Grid.Column="1">
+                <Image Source="images/buttons/op_exponent.png" />
+            </Button>
+            <Button
+                x:Name="sin"
+                Grid.Row="1"
+                Grid.Column="2">
+                <Image Source="images/buttons/trig_sin.png" />
+            </Button>
+            <Button
+                x:Name="cos"
+                Grid.Row="1"
+                Grid.Column="3">
+                <Image Source="images/buttons/trig_cos.png" />
+            </Button>
+            <Button
+                x:Name="tan"
+                Grid.Row="1"
+                Grid.Column="4"
+                Click="Tan_Click">
+                <Image Source="images/buttons/trig_tan.png" />
+            </Button>
+
+            <!--  Row 2  -->
+            <Button
+                x:Name="squareRoot"
+                Grid.Row="2"
+                Grid.Column="0"
+                Click="SquareRoot_Click">
+                <Image Source="images/buttons/op_square_root.png" />
+            </Button>
+            <Button
+                x:Name="TenToX"
+                Grid.Row="2"
+                Grid.Column="1">
+                <Image Source="images/buttons/op_ten_exp.png" />
+            </Button>
+            <Button
+                x:Name="log"
+                Grid.Row="2"
+                Grid.Column="2">
+                <Image Source="images/buttons/op_log.png" />
+            </Button>
+            <Button
+                x:Name="exp"
+                Grid.Row="2"
+                Grid.Column="3">
+                <Image Source="images/buttons/op_exp.png" />
+            </Button>
+            <Button
+                x:Name="mod"
+                Grid.Row="2"
+                Grid.Column="4">
+                <Image Source="images/buttons/op_mod.png" />
+            </Button>
+
+            <!--  Row 3  -->
+            <Button Grid.Row="3" Grid.Column="0">
+                <Image Source="images/buttons/tester.png" />
+            </Button>
+            <Button
+                x:Name="CE"
+                Grid.Row="3"
+                Grid.Column="1">
+                <Image Source="images/buttons/func_clear_entry.png" />
+            </Button>
+            <Button
+                x:Name="C"
+                Grid.Row="3"
+                Grid.Column="2">
+                <Image Source="images/buttons/func_clear.png" />
+            </Button>
+            <Button Grid.Row="3" Grid.Column="3">
+                <Image Source="images/buttons/tester.png" />
+            </Button>
+            <Button
+                x:Name="div"
+                Grid.Row="3"
+                Grid.Column="4">
+                <Image Source="images/buttons/op_div.png" />
+            </Button>
+
+            <!--  Row 4  -->
+            <Button
+                x:Name="pi"
+                Grid.Row="4"
+                Grid.Column="0">
+                <Image Source="images/buttons/const_pi.png" />
+            </Button>
+            <Button
+                x:Name="seven"
+                Grid.Row="4"
+                Grid.Column="1">
+                <Image Source="images/buttons/num_7.png" />
+            </Button>
+            <Button
+                x:Name="eight"
+                Grid.Row="4"
+                Grid.Column="2">
+                <Image Source="images/buttons/num_8.png" />
+            </Button>
+            <Button
+                x:Name="nine"
+                Grid.Row="4"
+                Grid.Column="3">
+                <Image Source="images/buttons/num_9.png" />
+            </Button>
+            <Button
+                x:Name="mult"
+                Grid.Row="4"
+                Grid.Column="4">
+                <Image Source="images/buttons/op_mult.png" />
+            </Button>
+
+            <!--  Row 5  -->
+            <Button
+                x:Name="factorial"
+                Grid.Row="5"
+                Grid.Column="0">
+                <Image Source="images/buttons/op_fact.png" />
+            </Button>
+            <Button
+                x:Name="four"
+                Grid.Row="5"
+                Grid.Column="1">
+                <Image Source="images/buttons/num_4.png" />
+            </Button>
+            <Button
+                x:Name="five"
+                Grid.Row="5"
+                Grid.Column="2">
+                <Image Source="images/buttons/num_5.png" />
+            </Button>
+            <Button
+                x:Name="six"
+                Grid.Row="5"
+                Grid.Column="3">
+                <Image Source="images/buttons/num_6.png" />
+            </Button>
+            <Button
+                x:Name="minus"
+                Grid.Row="5"
+                Grid.Column="4">
+                <Image Source="images/buttons/op_minus.png" />
+            </Button>
+
+            <!--  Row 6  -->
+            <Button
+                x:Name="plusMinus"
+                Grid.Row="6"
+                Grid.Column="0">
+                <Image Source="images/buttons/op_plus_minus.png" />
+            </Button>
+            <Button
+                x:Name="one"
+                Grid.Row="6"
+                Grid.Column="1">
+                <Image Source="images/buttons/num_1.png" />
+            </Button>
+            <Button
+                x:Name="two"
+                Grid.Row="6"
+                Grid.Column="2">
+                <Image Source="images/buttons/num_2.png" />
+            </Button>
+            <Button
+                x:Name="three"
+                Grid.Row="6"
+                Grid.Column="3">
+                <Image Source="images/buttons/num_3.png" />
+            </Button>
+            <Button
+                x:Name="plus"
+                Grid.Row="6"
+                Grid.Column="4">
+                <Image Source="images/buttons/op_plus.png" />
+            </Button>
+
+            <!--  Row 7  -->
+            <Button
+                x:Name="open_par"
+                Grid.Row="7"
+                Grid.Column="0">
+                <Image Source="images/buttons/expr_left_par.png" />
+            </Button>
+            <Button
+                x:Name="close_par"
+                Grid.Row="7"
+                Grid.Column="1">
+                <Image Source="images/buttons/expr_right_par.png" />
+            </Button>
+            <Button
+                x:Name="zero"
+                Grid.Row="7"
+                Grid.Column="2">
+                <Image Source="images/buttons/num_0.png" />
+            </Button>
+            <Button
+                x:Name="decimal"
+                Grid.Row="7"
+                Grid.Column="3">
+                <Image Source="images/buttons/num_dec.png" />
+            </Button>
+            <Button
+                x:Name="equal"
+                Grid.Row="7"
+                Grid.Column="4">
+                <Image Source="images/buttons/eval_equal.png" />
+            </Button>
+
+        </Grid>
+    </Grid>
+
+</Window>
