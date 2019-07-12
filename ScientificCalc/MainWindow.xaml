@@ -19,6 +19,17 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
+
+        <!--  Displays Current Expression  -->
+        <Viewbox
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalAlignment="Right">
+            <TextBlock Text="{Binding Display, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}" />
+        </Viewbox>
+
+
+        <!--  Button Grid  -->
         <Grid Grid.Row="2" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -50,25 +61,29 @@
             <Button
                 x:Name="MR"
                 Grid.Row="0"
-                Grid.Column="1">
+                Grid.Column="1"
+                Click="MR_Click">
                 <Image Cursor="Arrow" Source="images/buttons/mem_MR.png" />
             </Button>
             <Button
                 x:Name="MPlus"
                 Grid.Row="0"
-                Grid.Column="2">
+                Grid.Column="2"
+                Click="MPlus_Click">
                 <Image Source="images/buttons/mem_add.png" />
             </Button>
             <Button
                 x:Name="MMinus"
                 Grid.Row="0"
-                Grid.Column="3">
+                Grid.Column="3"
+                Click="MMinus_Click">
                 <Image Source="images/buttons/mem_remove.png" />
             </Button>
             <Button
                 x:Name="MS"
                 Grid.Row="0"
-                Grid.Column="4">
+                Grid.Column="4"
+                Click="MS_Click">
                 <Image Source="images/buttons/mem_MS.png" />
             </Button>
 
@@ -83,19 +98,22 @@
             <Button
                 x:Name="xToTheY"
                 Grid.Row="1"
-                Grid.Column="1">
+                Grid.Column="1"
+                Click="XToTheY_Click">
                 <Image Source="images/buttons/op_exponent.png" />
             </Button>
             <Button
                 x:Name="sin"
                 Grid.Row="1"
-                Grid.Column="2">
+                Grid.Column="2"
+                Click="Sin_Click">
                 <Image Source="images/buttons/trig_sin.png" />
             </Button>
             <Button
                 x:Name="cos"
                 Grid.Row="1"
-                Grid.Column="3">
+                Grid.Column="3"
+                Click="Cos_Click">
                 <Image Source="images/buttons/trig_cos.png" />
             </Button>
             <Button
@@ -117,51 +135,64 @@
             <Button
                 x:Name="TenToX"
                 Grid.Row="2"
-                Grid.Column="1">
+                Grid.Column="1"
+                Click="TenToX_Click">
                 <Image Source="images/buttons/op_ten_exp.png" />
             </Button>
             <Button
                 x:Name="log"
                 Grid.Row="2"
-                Grid.Column="2">
+                Grid.Column="2"
+                Click="Log_Click">
                 <Image Source="images/buttons/op_log.png" />
             </Button>
             <Button
                 x:Name="exp"
                 Grid.Row="2"
-                Grid.Column="3">
+                Grid.Column="3"
+                Click="Exp_Click">
                 <Image Source="images/buttons/op_exp.png" />
             </Button>
             <Button
                 x:Name="mod"
                 Grid.Row="2"
-                Grid.Column="4">
+                Grid.Column="4"
+                Click="Mod_Click">
                 <Image Source="images/buttons/op_mod.png" />
             </Button>
 
             <!--  Row 3  -->
-            <Button Grid.Row="3" Grid.Column="0">
+            <Button
+                Grid.Row="3"
+                Grid.Column="0"
+                Click="Button_Click">
                 <Image Source="images/buttons/tester.png" />
             </Button>
             <Button
                 x:Name="CE"
                 Grid.Row="3"
-                Grid.Column="1">
+                Grid.Column="1"
+                Click="CE_Click">
                 <Image Source="images/buttons/func_clear_entry.png" />
             </Button>
             <Button
                 x:Name="C"
                 Grid.Row="3"
-                Grid.Column="2">
+                Grid.Column="2"
+                Click="C_Click">
                 <Image Source="images/buttons/func_clear.png" />
             </Button>
-            <Button Grid.Row="3" Grid.Column="3">
+            <Button
+                Grid.Row="3"
+                Grid.Column="3"
+                Click="Button_Click_1">
                 <Image Source="images/buttons/tester.png" />
             </Button>
             <Button
                 x:Name="div"
                 Grid.Row="3"
-                Grid.Column="4">
+                Grid.Column="4"
+                Click="Div_Click">
                 <Image Source="images/buttons/op_div.png" />
             </Button>
 
@@ -169,31 +200,36 @@
             <Button
                 x:Name="pi"
                 Grid.Row="4"
-                Grid.Column="0">
+                Grid.Column="0"
+                Click="Pi_Click">
                 <Image Source="images/buttons/const_pi.png" />
             </Button>
             <Button
                 x:Name="seven"
                 Grid.Row="4"
-                Grid.Column="1">
+                Grid.Column="1"
+                Click="Seven_Click">
                 <Image Source="images/buttons/num_7.png" />
             </Button>
             <Button
                 x:Name="eight"
                 Grid.Row="4"
-                Grid.Column="2">
+                Grid.Column="2"
+                Click="Eight_Click">
                 <Image Source="images/buttons/num_8.png" />
             </Button>
             <Button
                 x:Name="nine"
                 Grid.Row="4"
-                Grid.Column="3">
+                Grid.Column="3"
+                Click="Nine_Click">
                 <Image Source="images/buttons/num_9.png" />
             </Button>
             <Button
                 x:Name="mult"
                 Grid.Row="4"
-                Grid.Column="4">
+                Grid.Column="4"
+                Click="Mult_Click">
                 <Image Source="images/buttons/op_mult.png" />
             </Button>
 
@@ -201,31 +237,39 @@
             <Button
                 x:Name="factorial"
                 Grid.Row="5"
-                Grid.Column="0">
+                Grid.Column="0"
+                Width="95"
+                Margin="0,0.4,0,0"
+                HorizontalAlignment="Left"
+                Click="Factorial_Click">
                 <Image Source="images/buttons/op_fact.png" />
             </Button>
             <Button
                 x:Name="four"
                 Grid.Row="5"
-                Grid.Column="1">
+                Grid.Column="1"
+                Click="Four_Click">
                 <Image Source="images/buttons/num_4.png" />
             </Button>
             <Button
                 x:Name="five"
                 Grid.Row="5"
-                Grid.Column="2">
+                Grid.Column="2"
+                Click="Five_Click">
                 <Image Source="images/buttons/num_5.png" />
             </Button>
             <Button
                 x:Name="six"
                 Grid.Row="5"
-                Grid.Column="3">
+                Grid.Column="3"
+                Click="Six_Click">
                 <Image Source="images/buttons/num_6.png" />
             </Button>
             <Button
                 x:Name="minus"
                 Grid.Row="5"
-                Grid.Column="4">
+                Grid.Column="4"
+                Click="Minus_Click">
                 <Image Source="images/buttons/op_minus.png" />
             </Button>
 
@@ -233,31 +277,36 @@
             <Button
                 x:Name="plusMinus"
                 Grid.Row="6"
-                Grid.Column="0">
+                Grid.Column="0"
+                Click="PlusMinus_Click">
                 <Image Source="images/buttons/op_plus_minus.png" />
             </Button>
             <Button
                 x:Name="one"
                 Grid.Row="6"
-                Grid.Column="1">
+                Grid.Column="1"
+                Click="One_Click">
                 <Image Source="images/buttons/num_1.png" />
             </Button>
             <Button
                 x:Name="two"
                 Grid.Row="6"
-                Grid.Column="2">
+                Grid.Column="2"
+                Click="Two_Click">
                 <Image Source="images/buttons/num_2.png" />
             </Button>
             <Button
                 x:Name="three"
                 Grid.Row="6"
-                Grid.Column="3">
+                Grid.Column="3"
+                Click="Three_Click">
                 <Image Source="images/buttons/num_3.png" />
             </Button>
             <Button
                 x:Name="plus"
                 Grid.Row="6"
-                Grid.Column="4">
+                Grid.Column="4"
+                Click="Plus_Click">
                 <Image Source="images/buttons/op_plus.png" />
             </Button>
 
@@ -265,31 +314,36 @@
             <Button
                 x:Name="open_par"
                 Grid.Row="7"
-                Grid.Column="0">
+                Grid.Column="0"
+                Click="Open_par_Click">
                 <Image Source="images/buttons/expr_left_par.png" />
             </Button>
             <Button
                 x:Name="close_par"
                 Grid.Row="7"
-                Grid.Column="1">
+                Grid.Column="1"
+                Click="Close_par_Click">
                 <Image Source="images/buttons/expr_right_par.png" />
             </Button>
             <Button
                 x:Name="zero"
                 Grid.Row="7"
-                Grid.Column="2">
+                Grid.Column="2"
+                Click="Zero_Click">
                 <Image Source="images/buttons/num_0.png" />
             </Button>
             <Button
                 x:Name="decimal"
                 Grid.Row="7"
-                Grid.Column="3">
+                Grid.Column="3"
+                Click="Decimal_Click">
                 <Image Source="images/buttons/num_dec.png" />
             </Button>
             <Button
                 x:Name="equal"
                 Grid.Row="7"
-                Grid.Column="4">
+                Grid.Column="4"
+                Click="Equal_Click">
                 <Image Source="images/buttons/eval_equal.png" />
             </Button>
 
