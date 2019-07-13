@@ -24,7 +24,6 @@ namespace ScientificCalc
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private string CurrentValue = "";
-        private string Expression = "";
         private MathEvaluator Eval = new MathEvaluator();
 
         public MainWindow()
@@ -54,33 +53,53 @@ namespace ScientificCalc
                 handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void UpdateCurrentValue(string NewValue, bool IsNewTerm=false, bool IsPar=false, string Operation="")
+        private void UpdateCurrentValue(string NewValue, bool IsNewTerm=false, string Operation="")
         {
-            string UpdatedValue = "";
-            if (IsNewTerm == true)
+            // Remove 0 if it is only current value
+            if (this.Display == "0")
             {
-                UpdatedValue = NewValue;
-            }
-            else if (Operation != "")
-            {
-                UpdatedValue = TransformCurrentValue(Value: this.CurrentValue, Transform: Operation);
-            }
-            else if (IsPar == true)
-            {
-                UpdatedValue = "";
-            }
-            else
-            {
-                UpdatedValue = this.CurrentValue + NewValue;
+                this.Display = "";
+                this.CurrentValue = "";
             }
 
+            // Determine new value
+            string UpdatedValue = "";
+            if (IsNewTerm == true)
+                UpdatedValue = "";
+            else if (Operation != "")
+                UpdatedValue = TransformCurrentValue(Value: this.CurrentValue, Transform: Operation);
+            else
+                UpdatedValue = this.CurrentValue + NewValue;
+
             // TODO: Check validity of Updated Value
+
+            if (Operation != "")
+            {
+                string NewDisplay = ReplaceLastOccurrence(Source: this.Display, Find: this.CurrentValue, Replace: UpdatedValue);
+                this.Display = NewDisplay;
+            }
+            else
+                Display += NewValue;
+
+            // Update current value
             this.CurrentValue = UpdatedValue;
-            Display += NewValue;
+        }
+
+        public static string ReplaceLastOccurrence(string Source, string Find, string Replace)
+        {
+            int place = Source.LastIndexOf(Find);
+
+            if (place == -1)
+                return Source;
+
+            string result = Source.Remove(place, Find.Length).Insert(place, Replace);
+            return result;
         }
 
         private string EvaluateExpression(string Expression)
         {
+            double result = Eval.Evaluate(this.Display);
+            this.Display = result.ToString();
             return "placeholder";
         }
 
@@ -121,52 +140,52 @@ namespace ScientificCalc
 
         private void Squared_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void XToTheY_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void Sin_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "", Operation: "sin");
         }
 
         private void Cos_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "", Operation: "cos");
         }
 
         private void Tan_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "", Operation: "tan");
         }
 
         private void SquareRoot_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "", Operation: "sqrt");
         }
 
         private void TenToX_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void Log_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "", Operation: "log");
         }
 
         private void Exp_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "", Operation: "exp");
         }
 
         private void Mod_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "%", IsNewTerm: true);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -176,7 +195,7 @@ namespace ScientificCalc
 
         private void CE_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void C_Click(object sender, RoutedEventArgs e)
@@ -192,12 +211,12 @@ namespace ScientificCalc
 
         private void Div_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "/", IsNewTerm: true);
         }
 
         private void Pi_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "pi");
         }
 
         private void Seven_Click(object sender, RoutedEventArgs e)
@@ -217,12 +236,12 @@ namespace ScientificCalc
 
         private void Mult_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "*", IsNewTerm: true);
         }
 
         private void Factorial_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void Four_Click(object sender, RoutedEventArgs e)
@@ -242,12 +261,12 @@ namespace ScientificCalc
 
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "-", IsNewTerm: true);
         }
 
         private void PlusMinus_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void One_Click(object sender, RoutedEventArgs e)
@@ -267,17 +286,17 @@ namespace ScientificCalc
 
         private void Plus_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: "+", IsNewTerm: true);
         }
 
         private void Open_par_Click(object sender, RoutedEventArgs e)
         {
-            UpdateCurrentValue(NewValue: "(", IsPar: true);
+            UpdateCurrentValue(NewValue: "(", IsNewTerm: true);
         }
 
         private void Close_par_Click(object sender, RoutedEventArgs e)
         {
-            UpdateCurrentValue(NewValue: ")", IsPar: false);
+            UpdateCurrentValue(NewValue: ")", IsNewTerm: true);
         }
 
         private void Zero_Click(object sender, RoutedEventArgs e)
@@ -287,12 +306,12 @@ namespace ScientificCalc
 
         private void Decimal_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateCurrentValue(NewValue: ".");
         }
 
         private void Equal_Click(object sender, RoutedEventArgs e)
         {
-
+            EvaluateExpression(this.Display);
         }
     }
 }
