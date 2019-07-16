@@ -62,11 +62,6 @@ namespace ScientificCalc
             this.Display = this.DisplayControl.Text;
         }
 
-        private string TransformCurrentValue(string Value, string Transform)
-        {
-            return String.Format("{0}({1})", Transform, Value);
-        }
-
         private async void TesterFunc()
         {
             this.Display += "?";
@@ -74,37 +69,40 @@ namespace ScientificCalc
 
         private void MC_Click(object sender, RoutedEventArgs e)
         {
-            TesterFunc();
+            this.DisplayControl.ClearMemory();
         }
 
         private void MR_Click(object sender, RoutedEventArgs e)
         {
-
+            this.DisplayControl.RecallMemory();
         }
 
         private void MPlus_Click(object sender, RoutedEventArgs e)
         {
-
+            EvaluateExpression();
+            this.DisplayControl.StorePositiveValue(this.Display);
         }
 
         private void MMinus_Click(object sender, RoutedEventArgs e)
         {
-
+            EvaluateExpression();
+            this.DisplayControl.StoreNegativeValue(this.Display);
         }
 
         private void MS_Click(object sender, RoutedEventArgs e)
         {
-
+            EvaluateExpression();
+            this.DisplayControl.StoreValue(this.Display);
         }
 
         private void Squared_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            this.ButtonPressed(NewValue: "^(2)");
         }
 
         private void XToTheY_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            this.ButtonPressed(NewValue: "^");
         }
 
         private void Sin_Click(object sender, RoutedEventArgs e)
@@ -129,7 +127,8 @@ namespace ScientificCalc
 
         private void TenToX_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            this.EvaluateExpression();
+            this.ButtonPressed(NewValue: "", Operation: "10^");
         }
 
         private void Log_Click(object sender, RoutedEventArgs e)
@@ -147,14 +146,10 @@ namespace ScientificCalc
             this.ButtonPressed(NewValue: "%");
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void CE_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            this.Display = "0";
+            this.DisplayControl.Clear();
         }
 
         private void C_Click(object sender, RoutedEventArgs e)
@@ -163,9 +158,9 @@ namespace ScientificCalc
             this.DisplayControl.Clear();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-
+            this.ButtonPressed(NewValue: "BACKSPACE");
         }
 
         private void Div_Click(object sender, RoutedEventArgs e)
@@ -221,11 +216,6 @@ namespace ScientificCalc
         private void Minus_Click(object sender, RoutedEventArgs e)
         {
             this.ButtonPressed(NewValue: "-", IsNewTerm: true);
-        }
-
-        private void PlusMinus_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO
         }
 
         private void One_Click(object sender, RoutedEventArgs e)

@@ -12,7 +12,11 @@ namespace ScientificCalc
         public string Text { get; set; }
         public string Value { get; set; }
         public string DisplayValue { get; set; }
+        public string StoredValue { get; set; }
         private MathEvaluator Eval = new MathEvaluator();
+        private bool UserEnteredParentheses = false;
+
+        public const string BackspaceWithNoCharactersMessage = "No characters to erase.";
 
         public DisplayControl()
         {
@@ -26,16 +30,32 @@ namespace ScientificCalc
             if (this.Value == "0")
                 this.Value = "";
 
+            switch (NewValue)
+            {
+                case "(":
+                    this.UserEnteredParentheses = true;
+                    break;
+                case "BACKSPACE":
+                    this.Backspace();
+                    return;
+                default:
+                    break;
+            }
+
             // Determine new value
             string UpdatedValue = "";
             if (IsNewTerm == true)
-                UpdatedValue = "";
+                if (Operation == "")
+                    UpdatedValue = "";
+                else
+                    UpdatedValue = TransformCurrentValue(Value: this.Value, Transform: Operation);
             else if (Operation != "")
                 UpdatedValue = TransformCurrentValue(Value: this.Value, Transform: Operation);
             else
                 UpdatedValue = this.Value + NewValue;
 
             // TODO: Check validity of Updated Value
+
             // Update display text
             UpdateText(NewValue: NewValue, UpdatedValue: UpdatedValue, Operation: Operation);
             // Update current value
@@ -44,7 +64,10 @@ namespace ScientificCalc
 
         private string TransformCurrentValue(string Value, string Transform)
         {
-            return String.Format("{0}({1})", Transform, Value);
+            if (this.UserEnteredParentheses)
+                return String.Format("{0}(", Transform);
+            else
+                return String.Format("{0}({1})", Transform, Value);
         }
 
         public string UpdateText(string NewValue, string UpdatedValue, string Operation = "")
@@ -55,9 +78,10 @@ namespace ScientificCalc
                 result = "";
 
             if (Operation != "")
-            {
-                result = ReplaceLastOccurrence(Source: result, Find: this.Value, Replace: UpdatedValue);
-            }
+                if (this.UserEnteredParentheses)
+                    result += UpdatedValue;
+                else
+                    result = ReplaceLastOccurrence(Source: result, Find: this.Value, Replace: UpdatedValue);
             else
                 result += NewValue;
 
@@ -71,6 +95,7 @@ namespace ScientificCalc
 
             if (place == -1)
                 return Source;
+                
 
             string result = Source.Remove(place, Find.Length).Insert(place, Replace);
             return result;
@@ -87,6 +112,45 @@ namespace ScientificCalc
             string result = Eval.Evaluate(this.Text).ToString();
             this.Value = result;
             this.Text = result;
+            this.UserEnteredParentheses = false;
+        }
+
+        public void StoreValue(string ValueToStore)
+        {
+            this.StoredValue = ValueToStore;
+        }
+
+        public void StorePositiveValue(string ValueToStore)
+        {
+            this.StoredValue = String.Format("{0}", Math.Abs(Double.Parse(ValueToStore)));
+        }
+
+        public void StoreNegativeValue(string ValueToStore)
+        {
+            this.StoredValue = String.Format("{0}", -1 * Math.Abs(Double.Parse(ValueToStore)));
+        }
+
+        public void ClearMemory()
+        {
+            this.StoredValue = "";
+        }
+
+        public void RecallMemory()
+        {
+            this.Update(NewValue: this.StoredValue);
+        }
+
+        public void Backspace()
+        {
+            try
+            {
+                this.Value = this.Value.Remove(this.Value.Length - 1);
+                this.Text = this.Text.Remove(this.Text.Length - 1);
+            }
+            catch(IndexOutOfRangeException e)
+            {
+                throw new IndexOutOfRangeException("No characters to erase!");
+            }
         }
     }
 }
