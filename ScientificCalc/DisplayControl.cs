@@ -142,15 +142,34 @@ namespace ScientificCalc
 
         public void Backspace()
         {
+
+            try
+            {
+                this.Text = this.Text.Remove(this.Text.Length - 1);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                throw new IndexOutOfRangeException("No characters to erase!");
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return;
+            }
+
             try
             {
                 this.Value = this.Value.Remove(this.Value.Length - 1);
-                this.Text = this.Text.Remove(this.Text.Length - 1);
             }
             catch(IndexOutOfRangeException e)
             {
                 throw new IndexOutOfRangeException("No characters to erase!");
             }
+            catch(ArgumentOutOfRangeException e)
+            {
+                return;
+            }
+
+
         }
     }
 }

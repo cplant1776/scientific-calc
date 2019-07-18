@@ -23,6 +23,7 @@ namespace ScientificCalc
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private DisplayControl DisplayControl = new DisplayControl();
+        private bool isShowingError = false;
 
         public MainWindow()
         {
@@ -52,20 +53,42 @@ namespace ScientificCalc
 
         private void ButtonPressed(string NewValue, bool IsNewTerm = false, string Operation = "")
         {
+            if (this.isShowingError)
+                toggleErrorDisplay();
+
             this.DisplayControl.Update(NewValue: NewValue, IsNewTerm: IsNewTerm, Operation: Operation);
             this.Display = this.DisplayControl.Text;
         }
 
         private void EvaluateExpression()
         {
-            this.DisplayControl.Evaluate();
-            this.Display = this.DisplayControl.Text;
+            try
+            {
+                this.DisplayControl.Evaluate();
+                this.Display = this.DisplayControl.Text;
+            }
+            catch (LoreSoft.MathExpressions.ParseException e)
+            {
+                Console.WriteLine("Invalid expression: {0}", e);
+                this.toggleErrorDisplay();
+            }
         }
 
-        private async void TesterFunc()
+        private void toggleErrorDisplay()
         {
-            this.Display += "?";
+            if (this.isShowingError)
+            {
+                errorDisplay.Opacity = 0.0;
+                this.isShowingError = false;
+            }
+            else
+            {
+                errorDisplay.Opacity = 1.0;
+                this.isShowingError = true;
+            }
+               
         }
+
 
         private void MC_Click(object sender, RoutedEventArgs e)
         {
@@ -262,5 +285,128 @@ namespace ScientificCalc
         {
             EvaluateExpression();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PlusMinus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //Keybindings
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                // Basic Digits
+                case Key.D1:
+                    this.One_Click(sender, e);
+                    break;
+                case Key.D2:
+                    this.Two_Click(sender, e);
+                    break;
+                case Key.D3:
+                    this.Three_Click(sender, e);
+                    break;
+                case Key.D4:
+                    this.Four_Click(sender, e);
+                    break;
+                case Key.D5:
+                    this.Five_Click(sender, e);
+                    break;
+                case Key.D6:
+                    this.Six_Click(sender, e);
+                    break;
+                case Key.D7:
+                    this.Seven_Click(sender, e);
+                    break;
+                case Key.D8:
+                    this.Eight_Click(sender, e);
+                    break;
+                case Key.D9:
+                    this.Nine_Click(sender, e);
+                    break;
+                case Key.D0:
+                    this.Zero_Click(sender, e);
+                    break;
+                case Key.Decimal:
+                    this.Decimal_Click(sender, e);
+                    break;
+
+                // Numpad digits
+                case Key.NumPad1:
+                    this.One_Click(sender, e);
+                    break;
+                case Key.NumPad2:
+                    this.Two_Click(sender, e);
+                    break;
+                case Key.NumPad3:
+                    this.Three_Click(sender, e);
+                    break;
+                case Key.NumPad4:
+                    this.Four_Click(sender, e);
+                    break;
+                case Key.NumPad5:
+                    this.Five_Click(sender, e);
+                    break;
+                case Key.NumPad6:
+                    this.Six_Click(sender, e);
+                    break;
+                case Key.NumPad7:
+                    this.Seven_Click(sender, e);
+                    break;
+                case Key.NumPad8:
+                    this.Eight_Click(sender, e);
+                    break;
+                case Key.NumPad9:
+                    this.Nine_Click(sender, e);
+                    break;
+                case Key.NumPad0:
+                    this.Zero_Click(sender, e);
+                    break;
+
+                // Operations
+                case Key.OemPlus:
+                    this.Plus_Click(sender, e);
+                    break;
+                case Key.OemMinus:
+                    this.Minus_Click(sender, e);
+                    break;
+                case Key.Multiply:
+                    this.Mult_Click(sender, e);
+                    break;
+                case Key.Divide:
+                    this.Div_Click(sender, e);
+                    break;
+                case Key.OemBackslash:
+                    this.Div_Click(sender, e);
+                    break;
+                case Key.OemOpenBrackets:
+                    this.Open_par_Click(sender, e);
+                    break;
+                case Key.OemCloseBrackets:
+                    this.Close_par_Click(sender, e);
+                    break;
+
+                // Evaluation
+                case Key.Enter:
+                    this.Equal_Click(sender, e);
+                    break;
+                case Key.System:
+                    this.Equal_Click(sender, e);
+                    break;
+
+                // Backspace
+                case Key.Back:
+                    this.Back_Click(sender, e);
+                    break;
+
+            }
+        }
+
+
     }
 }

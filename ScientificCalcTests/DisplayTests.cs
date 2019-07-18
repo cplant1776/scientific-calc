@@ -384,8 +384,11 @@ namespace ScientificCalcTests
             DisplayControl display = new DisplayControl();
             // Act
             display.Backspace();
+            display.Backspace();
             // Assert
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => display.Backspace());
+            string actual = display.Text;
+            string expected = "";
+            Assert.AreEqual(expected, actual, "Failed Backspace_No_Values");
         }
 
 
